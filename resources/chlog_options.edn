@@ -1,0 +1,15 @@
+{:project-formatted-name "fn-thingy"
+ :copyright-holder "Brad Losavio"
+
+ :changelog-UUID #uuid "c8842399-457e-447a-83b0-861b8946f623"
+
+ :changelog-html-directory "doc/"
+ :changelog-html-filename "changelog.html"
+
+ :changelog-markdown-directory ""
+ :changelog-markdown-filename "changelog.md"
+
+ :changelog-entries-directory "resources/changelog_entries/"
+ :changelog-data-file "changelog.edn"
+
+ :tidy-html? true}
