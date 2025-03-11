@@ -36,9 +36,9 @@
   (print-form-then-eval "(appli Bob 99)") [:br] [:br]
   (print-form-then-eval "(appli Charlie [:chocolate :strawberry :vanilla])" 85 75)]
 
- [:p "That looks promising. " [:code "Alice"] " returns string " [:code "Hello, World!"] " regardless of the argument, " [:code "Bob"] " increments the numberic argument, and " [:code "Charlie"] " indeed reverses the sequence passed as the next argument."]
+ [:p "That looks promising. " [:code "Alice"] " returns string " [:code "Hello, World!"] " regardless of the argument, " [:code "Bob"] " increments the numeric argument, and " [:code "Charlie"] " indeed reverses the sequence passed as the next argument."]
 
- [:p "There's someting we'd like to improve: We wanted to think of " [:code "Alice"] ", " [:code "Bob"] ", and " [:code "Charlie"] " as functions, so having " [:code "appli"] " sprinkled throughout kinda destroys that illusion."]
+ [:p "There's something we'd like to improve: We wanted to think of " [:code "Alice"] ", " [:code "Bob"] ", and " [:code "Charlie"] " as functions, so having " [:code "appli"] " sprinkled throughout kinda destroys that illusion."]
 
  [:p "Regular Clojure vectors " [:em "can"] " act as functions when at the head of an S-expression."]
 
@@ -124,7 +124,7 @@
 
    [:pre (print-form-then-eval "(type (map inc (make-fn-thingy 97 98 99)))")]]
 
-  [:li [:p [:strong "Assigning"] " a " [:em "fn-thingy"] " invocation function is analogous to using " [:code "defn"] ". One difference is that suppling a doc-string and metadata are required. (Feel free to leave them empty, though.)"]
+  [:li [:p [:strong "Assigning"] " a " [:em "fn-thingy"] " invocation function is analogous to using " [:code "defn"] ". One difference is that supplying a doc-string and metadata are required. (Feel free to leave them empty, though.)"]
 
    [:pre (-> (print-form-then-eval "(defn-thingy yippee
                                  \"My docstring.\"

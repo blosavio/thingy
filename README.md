@@ -103,11 +103,11 @@
       <pre><code>(appli Alice :an-ignored-arg) ;; =&gt; &quot;Hello, World!&quot;</code><br><br><code>(appli Bob 99) ;; =&gt; 100</code><br><br><code>(appli Charlie [:chocolate :strawberry :vanilla])
 ;; =&gt; (:vanilla :strawberry :chocolate)</code></pre>
       <p>
-        That looks promising. <code>Alice</code> returns string <code>Hello, World!</code> regardless of the argument, <code>Bob</code> increments the numberic
+        That looks promising. <code>Alice</code> returns string <code>Hello, World!</code> regardless of the argument, <code>Bob</code> increments the numeric
         argument, and <code>Charlie</code> indeed reverses the sequence passed as the next argument.
       </p>
       <p>
-        There&apos;s someting we&apos;d like to improve: We wanted to think of <code>Alice</code>, <code>Bob</code>, and <code>Charlie</code> as functions, so
+        There&apos;s something we&apos;d like to improve: We wanted to think of <code>Alice</code>, <code>Bob</code>, and <code>Charlie</code> as functions, so
         having <code>appli</code> sprinkled throughout kinda destroys that illusion.
       </p>
       <p>
@@ -198,7 +198,7 @@
         </li>
         <li>
           <p>
-            <strong>Assigning</strong> a <em>fn-thingy</em> invocation function is analogous to using <code>defn</code>. One difference is that suppling a
+            <strong>Assigning</strong> a <em>fn-thingy</em> invocation function is analogous to using <code>defn</code>. One difference is that supplying a
             doc-string and metadata are required. (Feel free to leave them empty, though.)
           </p>
           <pre><code>(defn-thingy yippee

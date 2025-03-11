@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.6.0">
-    <meta charset="utf-8" compile-date="2025-03-12 05:55:55" content="width=device-width, initial-scale=1" name="viewport">
+    <meta charset="utf-8" compile-date="2025-03-12 06:56:01" content="width=device-width, initial-scale=1" name="viewport">
     <link href="project.css" rel="stylesheet" type="text/css">
     <title>
       fn-thingy — A Clojure library that provides a bizarre function definition mechanism
@@ -112,11 +112,11 @@
       <pre><code>(appli Alice :an-ignored-arg) ;; =&gt; "Hello, World!"</code><br><br><code>(appli Bob 99) ;; =&gt; 100</code><br><br><code>(appli Charlie [:chocolate :strawberry :vanilla])
 ;; =&gt; (:vanilla :strawberry :chocolate)</code></pre>
       <p>
-        That looks promising. <code>Alice</code> returns string <code>Hello, World!</code> regardless of the argument, <code>Bob</code> increments the numberic
+        That looks promising. <code>Alice</code> returns string <code>Hello, World!</code> regardless of the argument, <code>Bob</code> increments the numeric
         argument, and <code>Charlie</code> indeed reverses the sequence passed as the next argument.
       </p>
       <p>
-        There's someting we'd like to improve: We wanted to think of <code>Alice</code>, <code>Bob</code>, and <code>Charlie</code> as functions, so having
+        There's something we'd like to improve: We wanted to think of <code>Alice</code>, <code>Bob</code>, and <code>Charlie</code> as functions, so having
         <code>appli</code> sprinkled throughout kinda destroys that illusion.
       </p>
       <p>
@@ -207,7 +207,7 @@
         </li>
         <li>
           <p>
-            <strong>Assigning</strong> a <em>fn-thingy</em> invocation function is analogous to using <code>defn</code>. One difference is that suppling a
+            <strong>Assigning</strong> a <em>fn-thingy</em> invocation function is analogous to using <code>defn</code>. One difference is that supplying a
             doc-string and metadata are required. (Feel free to leave them empty, though.)
           </p>
           <pre><code>(defn-thingy yippee
