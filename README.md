@@ -185,10 +185,8 @@
           <p>
             Note that the type is distinct from a standard Clojure persistent vector.
           </p>
-          <pre></pre>
           <pre><code>(type (into (make-fn-thingy) #{:foo :bar :baz}))
 ;; =&gt; com.sagevisuals.AltFnInvocablePersistentVector</code></pre>
-          <pre></pre>
           <p>
             Manipulate an instance with your favorite tools.
           </p>

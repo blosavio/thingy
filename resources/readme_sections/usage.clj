@@ -112,7 +112,7 @@
 
    [:p "Note that the type is distinct from a standard Clojure persistent vector."]
 
-   [:pre [:pre (print-form-then-eval "(type (into (make-fn-thingy) #{:foo :bar :baz}))")]]
+   [:pre (print-form-then-eval "(type (into (make-fn-thingy) #{:foo :bar :baz}))")]
 
    [:p "Manipulate an instance with your favorite tools."]
 
