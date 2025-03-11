@@ -1,0 +1,32 @@
+{:sections [{:section-name "Setup"}
+            {:section-name "API" :section-href "https://blosavio.github.io/fn-thingy/index.html" :skip-section-load? true}
+            {:section-name "Changelog" :section-href "https://github.com/blosavio/fn-thingy/blob/main/changelog.md" :skip-section-load? true}
+            {:section-name "Introduction" :section-href "intro"}
+            {:section-name "Usage" :section-href "usage"}
+            {:section-name "Examples" :section-href "examples"}
+            {:section-name "Glossary"}
+            {:section-name "Contact" :section-href "https://github.com/blosavio" :skip-section-load? true}]
+
+ :clojars-badge? true
+ :copyright-holder "Brad Losavio"
+
+ ;; special directives to zprint on how to handle these functions
+ :fn-map-additions {}
+
+ :project-description "A Clojure library that provides a bizarre function definition mechanism"
+ :project-name-formatted "fn-thingy"
+
+ :readme-UUID #uuid "0b7db4a2-ac01-40eb-bb9b-0646700b987e"
+
+ :readme-html-directory "doc/"
+ :readme-html-filename "readme.html"
+
+ :readme-markdown-directory ""
+ :readme-markdown-filename "README.md"
+
+ :sections-directory "resources/readme_sections/"
+
+ :separator " => "
+ :wrap-at 80
+
+ :tidy-html? true}
