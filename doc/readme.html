@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.6.0">
-    <meta charset="utf-8" compile-date="2025-03-12 10:47:48" content="width=device-width, initial-scale=1" name="viewport">
+    <meta charset="utf-8" compile-date="2025-03-12 13:25:21" content="width=device-width, initial-scale=1" name="viewport">
     <link href="project.css" rel="stylesheet" type="text/css">
     <title>
       thingy — A Clojure library that provides a bizarre function definition mechanism
@@ -11,7 +11,7 @@
   <body>
     <a href="https://clojars.org/com.sagevlisuals/thingy"><img src="https://img.shields.io/clojars/v/com.sagevlisuals/thingy.svg"></a><br>
     <a href="#setup">Setup</a><br>
-    <a href="https://blosavio.github.io/fn-thingy/index.html">API</a><br>
+    <a href="https://blosavio.github.io/thingy/index.html">API</a><br>
     <a href="https://github.com/blosavio/thingy/blob/main/changelog.md">Changelog</a><br>
     <a href="#intro">Introduction</a><br>
     <a href="#usage">Usage</a><br>
@@ -36,7 +36,7 @@
       <h3>
         Require
       </h3>
-      <pre><code>(require '[fn-thingy.core :refer [defn-thingy make-fn-thingy]])</code></pre>
+      <pre><code>(require '[thingy.core :refer [defn-thingy make-thingy]])</code></pre>
     </section>
     <section id="intro">
       <h2>
@@ -47,8 +47,8 @@
         case and it is exceedingly unlikely to be useful or safe outside of that niche.
       </p>
       <p>
-        A <em>fn-thingy</em> instance, when appearing at the head of an S-expression serves as a function, consuming the arguments contained in the tail and
-        yielding a value. Unlike a typical function, the internal structure of a <em>fn-thingy</em> is manipulatable with all the functions that make up the
+        A <em>thingy</em> instance, when appearing at the head of an S-expression serves as a function, consuming the arguments contained in the tail and
+        yielding a value. Unlike a typical function, the internal structure of a <em>thingy</em> is manipulatable with all the functions that make up the
         vector interface.
       </p>
       <p>
@@ -63,7 +63,7 @@
       </p>
       <pre><code>(fn-vec arg1 arg2...)</code></pre>
       <p>
-        as well to read and to understand. The <em>fn-thingy</em> library enables such streamlining.
+        as well to read and to understand. The <em>thingy</em> library enables such streamlining.
       </p>
     </section>
     <section id="usage">
@@ -131,31 +131,31 @@
         For our Alice/Bob/Charlie trio, we'd like for there to be instead an implied <code>appli</code>.
       </p>
       <p>
-        To do that, let's introduce a new utility, <code>make-fn-thingy</code>.
+        To do that, let's introduce a new utility, <code>make-thingy</code>.
       </p>
-      <pre><code>(make-fn-thingy 97 98 99) ;; =&gt; [97 98 99]</code></pre>
+      <pre><code>(make-thingy 97 98 99) ;; =&gt; [97 98 99]</code></pre>
       <p>
         Does it do vector tasks?
       </p>
-      <pre><code>(count (make-fn-thingy 97 98 99)) ;; =&gt; 3</code><br><code>(nth (make-fn-thingy 97 98 99) 1) ;; =&gt; 98</code><br><code>(conj (make-fn-thingy 97 98 99) 100) ;; =&gt; [97 98 99 100]</code></pre>
+      <pre><code>(count (make-thingy 97 98 99)) ;; =&gt; 3</code><br><code>(nth (make-thingy 97 98 99) 1) ;; =&gt; 98</code><br><code>(conj (make-thingy 97 98 99) 100) ;; =&gt; [97 98 99 100]</code></pre>
       <p>
-        That certainly <code>looks</code> like a vector. Each instance of a <em>fn-thingy</em> implements the vector interface, so we have all the familiar
+        That certainly <code>looks</code> like a vector. Each instance of a <em>thingy</em> implements the vector interface, so we have all the familiar
         functions like <code>count</code>, <code>conj</code>, etc.
       </p>
       <p>
-        Now, let's re-define the our trio using <code>make-fn-thingy</code>.
+        Now, let's re-define the our trio using <code>make-thingy</code>.
       </p>
-      <pre><code>(def Alice (make-fn-thingy :a))</code><br><code>(def Bob (make-fn-thingy :b))</code><br><code>(def Charlie (make-fn-thingy :c))</code></pre>
+      <pre><code>(def Alice (make-thingy :a))</code><br><code>(def Bob (make-thingy :b))</code><br><code>(def Charlie (make-thingy :c))</code></pre>
       <p>
-        Let's see what happens when we try to use a <em>fn-thingy</em> as a function.
+        Let's see what happens when we try to use a <em>thingy</em> as a function.
       </p>
       <pre><code>(Alice 0) ;; =&gt; :a</code></pre>
       <p>
         Hmm. It appears to behave like a regular vector, with an implicit <code>nth</code>. This is the default.
       </p>
       <p>
-        Next, we'll re-set the invocation behavior of all instances of <em>fn-thingy</em>s to <code>appli</code> using another utility,
-        <code>defn-thingy</code>. It looks pretty much like <code>defn</code>.
+        Next, we'll re-set the invocation behavior of all instances of <em>thingy</em>s to <code>appli</code> using another utility, <code>defn-thingy</code>.
+        It looks pretty much like <code>defn</code>.
       </p>
       <pre><code>(defn-thingy my-appli
   "doc string"
@@ -163,7 +163,7 @@
   [f x]
   (appli f x))</code></pre>
       <p>
-        <code>defn-thingy</code> mutates the invocation behavior for all <code>fn-thingy</code> instances.
+        <code>defn-thingy</code> mutates the invocation behavior for all <em>thingy</em> instances.
       </p>
       <p>
         Let's see how our trio behaves.
@@ -177,37 +177,36 @@
         Details
       </h3>
       <p>
-        There are two steps to using <em>fn-thingy</em>: creating a <em>fn-thingy</em> instance, and assigning the invocation function.
+        There are two steps to using <em>thingy</em>: creating a <em>thingy</em> instance, and assigning the invocation function.
       </p>
       <ol>
         <li>
           <p>
-            <strong>Creating</strong> and manipulating a <em>fn-thingy</em> instance is analogous to that of vectors. To create, use
-            <code>make-fn-thingy</code>
+            <strong>Creating</strong> and manipulating a <em>thingy</em> instance is analogous to that of vectors. To create, use <code>make-thingy</code>
           </p>
-          <pre><code>(make-fn-thingy 97 98 99) ;; =&gt; [97 98 99]</code></pre>
+          <pre><code>(make-thingy 97 98 99) ;; =&gt; [97 98 99]</code></pre>
           <p>
             similar to using <code>vector</code>. (There is no analogous facility to making a vector literal.) Create a new instance from some other existing
             collection like this.
           </p>
-          <pre><code>(into (make-fn-thingy) #{:foo :bar :baz}) ;; =&gt; [:baz :bar :foo]</code></pre>
+          <pre><code>(into (make-thingy) #{:foo :bar :baz}) ;; =&gt; [:baz :bar :foo]</code></pre>
           <p>
             Note that the type is distinct from a standard Clojure persistent vector.
           </p>
-          <pre><code>(type (into (make-fn-thingy) #{:foo :bar :baz}))
+          <pre><code>(type (into (make-thingy) #{:foo :bar :baz}))
 ;; =&gt; com.sagevisuals.AltFnInvocablePersistentVector</code></pre>
           <p>
             Manipulate an instance with your favorite tools.
           </p>
-          <pre><code>(update (make-fn-thingy 97 98 99) 2 inc) ;; =&gt; [97 98 100]</code><br><br><code>(map inc (make-fn-thingy 97 98 99)) ;; =&gt; (98 99 100)</code></pre>
+          <pre><code>(update (make-thingy 97 98 99) 2 inc) ;; =&gt; [97 98 100]</code><br><br><code>(map inc (make-thingy 97 98 99)) ;; =&gt; (98 99 100)</code></pre>
           <p>
-            Note that, just like Clojure vectors, sequence functions consuming a <em>fn-thingy</em> instance will return a sequence.
+            Note that, just like Clojure vectors, sequence functions consuming a <em>thingy</em> instance will return a sequence.
           </p>
-          <pre><code>(type (map inc (make-fn-thingy 97 98 99))) ;; =&gt; clojure.lang.LazySeq</code></pre>
+          <pre><code>(type (map inc (make-thingy 97 98 99))) ;; =&gt; clojure.lang.LazySeq</code></pre>
         </li>
         <li>
           <p>
-            <strong>Assigning</strong> a <em>fn-thingy</em> invocation function is analogous to using <code>defn</code>. One difference is that supplying a
+            <strong>Assigning</strong> a <em>thingy</em> invocation function is analogous to using <code>defn</code>. One difference is that supplying a
             doc-string and metadata are required. (Feel free to leave them empty, though.)
           </p>
           <pre><code>(defn-thingy yippee
@@ -218,20 +217,20 @@
           <p>
             This example assigns a 2-arity function that returns a string, ignoring its arguments. Observe.
           </p>
-          <pre><code>((make-fn-thingy) 99) ;; =&gt; "Hooray!"</code><br><code>((make-fn-thingy :a :b :c) :foo) ;; =&gt; "Hooray!"</code><br><code>((make-fn-thingy 1.23 4.56) 22/7) ;; =&gt; "Hooray!"</code></pre>
+          <pre><code>((make-thingy) 99) ;; =&gt; "Hooray!"</code><br><code>((make-thingy :a :b :c) :foo) ;; =&gt; "Hooray!"</code><br><code>((make-thingy 1.23 4.56) 22/7) ;; =&gt; "Hooray!"</code></pre>
           <p>
             The function is accessible in the same manner as any other var in the namespace.
           </p>
           <p>
-            The name has no affect on the operation of <em>fn-thingy</em> instances, but is provided so that the function may be invoked manually, like this.
+            The name has no affect on the operation of <em>thingy</em> instances, but is provided so that the function may be invoked manually, like this.
           </p>
           <pre><code>(yippee :a :b) ;; =&gt; "Hooray!"</code></pre>
           <p>
-            Evaluating <code>defn-thingy</code> synchronously mutates the invocation function for all <em>fn-thingy</em> instances.
+            Evaluating <code>defn-thingy</code> synchronously mutates the invocation function for all <em>thingy</em> instances.
           </p>
           <p>
-            The invocation function may have an arity of zero to eight, inclusive. When there is at least one argument, the <em>fn-thingy</em> instance is
-            passed as the first argument.
+            The invocation function may have an arity of zero to eight, inclusive. When there is at least one argument, the <em>thingy</em> instance is passed
+            as the first argument.
           </p>
         </li>
       </ol>
@@ -249,18 +248,18 @@
         Glossary
       </h2>
       <dl>
-        <dt id="fn-instance">
-          fn-thingy instance
+        <dt id="instance">
+          thingy instance
         </dt>
         <dd>
           <p>
             An instance of <code>com.sagevisuals.AltFnInvocableVector</code>. In nearly every regard, identical to an instance of
             <code>clojure.lang.PersistentVector</code>. Whereas a Clojure vector at the head of an S-expression behaves as if there is an implicit
-            <code>nth</code>, a <em>fn-thingy</em> instance invokes a dynamically-mutable <a href="#inv-fn">invocation function</a>. (Defaults to
+            <code>nth</code>, a <em>thingy</em> instance invokes a dynamically-mutable <a href="#inv-fn">invocation function</a>. (Defaults to
             <code>nth</code>.)
           </p>
           <p>
-            Instantiated with <code>make-fn-thingy</code>.
+            Instantiated with <code>make-thingy</code>.
           </p>
         </dd>
         <dt id="inv-fn">
@@ -268,8 +267,8 @@
         </dt>
         <dd>
           <p>
-            The function that is invoked when evaluating an S-expression with a <a href="#fn-instance"><em>fn-thingy</em> instance</a> at the head. In all
-            respects, a standard Clojure function, that may be called from any site.
+            The function that is invoked when evaluating an S-expression with a <a href="#instance"><em>thingy</em> instance</a> at the head. In all respects,
+            a standard Clojure function, that may be called from any site.
           </p>
           <p>
             Defined with <code>defn-thingy</code>.

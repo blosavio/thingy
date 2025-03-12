@@ -5,4 +5,4 @@
  [:h3 "Clojure CLI/deps.edn"]
  [:pre [:code (str *project-group* "/" *project-name* " {:mvn/version \"" *project-version* "\"}")]]
  [:h3 "Require"]
- [:pre (print-form-then-eval "(require '[fn-thingy.core :refer [defn-thingy make-fn-thingy]])")]]
+ [:pre (print-form-then-eval "(require '[thingy.core :refer [defn-thingy make-thingy]])")]]

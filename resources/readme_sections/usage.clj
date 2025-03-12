@@ -50,43 +50,43 @@
 
  [:p "For our Alice/Bob/Charlie trio, we'd like for there to be instead an implied " [:code "appli"] "."]
 
- [:p "To do that, let's introduce a new utility, " [:code "make-fn-thingy"] "."]
+ [:p "To do that, let's introduce a new utility, " [:code "make-thingy"] "."]
 
- [:pre (print-form-then-eval "(make-fn-thingy 97 98 99)")]
+ [:pre (print-form-then-eval "(make-thingy 97 98 99)")]
 
  [:p "Does it do vector tasks?"]
 
  [:pre
-  (print-form-then-eval "(count (make-fn-thingy 97 98 99))") [:br]
-  (print-form-then-eval "(nth (make-fn-thingy 97 98 99) 1)") [:br]
-  (print-form-then-eval "(conj (make-fn-thingy 97 98 99) 100)")]
+  (print-form-then-eval "(count (make-thingy 97 98 99))") [:br]
+  (print-form-then-eval "(nth (make-thingy 97 98 99) 1)") [:br]
+  (print-form-then-eval "(conj (make-thingy 97 98 99) 100)")]
 
- [:p "That certainly " [:code "looks"] " like a vector. Each instance of a " [:em "fn-thingy"] " implements the vector interface, so we have all the familiar functions like " [:code "count"] ", " [:code "conj"] ", etc."]
+ [:p "That certainly " [:code "looks"] " like a vector. Each instance of a " [:em "thingy"] " implements the vector interface, so we have all the familiar functions like " [:code "count"] ", " [:code "conj"] ", etc."]
 
- [:p "Now, let's re-define the our trio using " [:code "make-fn-thingy"] "."]
+ [:p "Now, let's re-define the our trio using " [:code "make-thingy"] "."]
 
  [:pre
-  (print-form-then-eval "(def Alice (make-fn-thingy :a))") [:br]
-  (print-form-then-eval "(def Bob (make-fn-thingy :b))") [:br]
-  (print-form-then-eval "(def Charlie (make-fn-thingy :c))")]
+  (print-form-then-eval "(def Alice (make-thingy :a))") [:br]
+  (print-form-then-eval "(def Bob (make-thingy :b))") [:br]
+  (print-form-then-eval "(def Charlie (make-thingy :c))")]
 
- [:p "Let's see what happens when we try to use a " [:em "fn-thingy"] " as a function."]
+ [:p "Let's see what happens when we try to use a " [:em "thingy"] " as a function."]
 
  (do ;; evaluate without displaying results
-   (fn-thingy.dangerous-vector/defaultize!-options)
+   (thingy.dangerous-vector/defaultize!-options)
    nil)
 
  [:pre (print-form-then-eval "(Alice 0)")]
 
  [:p "Hmm. It appears to behave like a regular vector, with an implicit " [:code "nth"] ". This is the default."]
 
- [:p "Next, we'll re-set the invocation behavior of all instances of " [:em "fn-thingy"] "s to " [:code "appli"] " using another utility, " [:code "defn-thingy"] ". It looks pretty much like " [:code "defn"] "."]
+ [:p "Next, we'll re-set the invocation behavior of all instances of " [:em "thingy"] "s to " [:code "appli"] " using another utility, " [:code "defn-thingy"] ". It looks pretty much like " [:code "defn"] "."]
 
  [:pre (-> (print-form-then-eval "(defn-thingy my-appli \"doc string\" {:metadata \"foo\"} [f x] (appli f x))")
            trim-evaluation
            (newline-and-indent-after-chars 1 ["my-appli" "ing\"" "}" "x]"]))]
 
- [:p [:code "defn-thingy"] " mutates the invocation behavior for all " [:code "fn-thingy"] " instances."]
+ [:p [:code "defn-thingy"] " mutates the invocation behavior for all " [:em "thingy"] " instances."]
 
  [:p "Let's see how our trio behaves."]
 
@@ -99,32 +99,32 @@
 
  [:h3 "Details"]
 
- [:p "There are two steps to using " [:em "fn-thingy"] ": creating a " [:em "fn-thingy"] " instance, and assigning the invocation function."]
+ [:p "There are two steps to using " [:em "thingy"] ": creating a " [:em "thingy"] " instance, and assigning the invocation function."]
 
  [:ol
-  [:li [:p [:strong "Creating"] " and manipulating a " [:em "fn-thingy"] " instance is analogous to that of vectors. To create, use " [:code "make-fn-thingy"]]
+  [:li [:p [:strong "Creating"] " and manipulating a " [:em "thingy"] " instance is analogous to that of vectors. To create, use " [:code "make-thingy"]]
 
-   [:pre (print-form-then-eval "(make-fn-thingy 97 98 99)")]
+   [:pre (print-form-then-eval "(make-thingy 97 98 99)")]
 
    [:p "similar to using " [:code "vector"] ". (There is no analogous facility to making a vector literal.) Create a new instance from some other existing collection like this."]
 
-   [:pre (print-form-then-eval "(into (make-fn-thingy) #{:foo :bar :baz})")]
+   [:pre (print-form-then-eval "(into (make-thingy) #{:foo :bar :baz})")]
 
    [:p "Note that the type is distinct from a standard Clojure persistent vector."]
 
-   [:pre (print-form-then-eval "(type (into (make-fn-thingy) #{:foo :bar :baz}))")]
+   [:pre (print-form-then-eval "(type (into (make-thingy) #{:foo :bar :baz}))")]
 
    [:p "Manipulate an instance with your favorite tools."]
 
    [:pre
-    (print-form-then-eval "(update (make-fn-thingy 97 98 99) 2 inc)") [:br] [:br]
-    (print-form-then-eval "(map inc (make-fn-thingy 97 98 99))")]
+    (print-form-then-eval "(update (make-thingy 97 98 99) 2 inc)") [:br] [:br]
+    (print-form-then-eval "(map inc (make-thingy 97 98 99))")]
 
-   [:p "Note that, just like Clojure vectors, sequence functions consuming a " [:em "fn-thingy"] " instance will return a sequence."]
+   [:p "Note that, just like Clojure vectors, sequence functions consuming a " [:em "thingy"] " instance will return a sequence."]
 
-   [:pre (print-form-then-eval "(type (map inc (make-fn-thingy 97 98 99)))")]]
+   [:pre (print-form-then-eval "(type (map inc (make-thingy 97 98 99)))")]]
 
-  [:li [:p [:strong "Assigning"] " a " [:em "fn-thingy"] " invocation function is analogous to using " [:code "defn"] ". One difference is that supplying a doc-string and metadata are required. (Feel free to leave them empty, though.)"]
+  [:li [:p [:strong "Assigning"] " a " [:em "thingy"] " invocation function is analogous to using " [:code "defn"] ". One difference is that supplying a doc-string and metadata are required. (Feel free to leave them empty, though.)"]
 
    [:pre (-> (print-form-then-eval "(defn-thingy yippee
                                  \"My docstring.\"
@@ -140,16 +140,16 @@
    [:p "This example assigns a 2-arity function that returns a string, ignoring its arguments. Observe."]
 
    [:pre
-    (print-form-then-eval "((make-fn-thingy) 99)") [:br]
-    (print-form-then-eval "((make-fn-thingy :a :b :c) :foo)") [:br]
-    (print-form-then-eval "((make-fn-thingy 1.23 4.56) 22/7)")]
+    (print-form-then-eval "((make-thingy) 99)") [:br]
+    (print-form-then-eval "((make-thingy :a :b :c) :foo)") [:br]
+    (print-form-then-eval "((make-thingy 1.23 4.56) 22/7)")]
 
    [:p "The function is accessible in the same manner as any other var in the namespace."]
 
-   [:p "The name has no affect on the operation of " [:em "fn-thingy"] " instances, but is provided so that the function may be invoked manually, like this."]
+   [:p "The name has no affect on the operation of " [:em "thingy"] " instances, but is provided so that the function may be invoked manually, like this."]
 
    [:pre (print-form-then-eval "(yippee :a :b)")]
 
-   [:p "Evaluating " [:code "defn-thingy"] " synchronously mutates the invocation function for all " [:em "fn-thingy"] " instances."]
+   [:p "Evaluating " [:code "defn-thingy"] " synchronously mutates the invocation function for all " [:em "thingy"] " instances."]
 
-   [:p "The invocation function may have an arity of zero to eight, inclusive. When there is at least one argument, the " [:em "fn-thingy"] " instance is passed as the first argument."]]]]
+   [:p "The invocation function may have an arity of zero to eight, inclusive. When there is at least one argument, the " [:em "thingy"] " instance is passed as the first argument."]]]]
