@@ -111,7 +111,7 @@
         having <code>appli</code> sprinkled throughout kinda destroys that illusion.
       </p>
       <p>
-        Regular Clojure vectors <em>can</em> act as functions when at the head of an S-expression.
+        Regular Clojure vectors have the capability to act as functions when at the head of an S-expression.
       </p>
       <pre><code>([97 98 99] 1) ;; =&gt; 98</code></pre>
       <p>
@@ -130,8 +130,8 @@
       </p>
       <pre><code>(count (make-thingy 97 98 99)) ;; =&gt; 3</code><br><code>(nth (make-thingy 97 98 99) 1) ;; =&gt; 98</code><br><code>(conj (make-thingy 97 98 99) 100) ;; =&gt; [97 98 99 100]</code></pre>
       <p>
-        That certainly <code>looks</code> like a vector. Each instance of a <em>thingy</em> implements the vector interface, so we have all the familiar
-        functions like <code>count</code>, <code>conj</code>, etc.
+        That certainly <em>looks</em> like a vector. Each instance of a <em>thingy</em> implements the vector interface, so we have all the familiar functions
+        like <code>count</code>, <code>conj</code>, etc.
       </p>
       <p>
         Now, let&apos;s re-define the our trio using <code>make-thingy</code>.
@@ -168,7 +168,7 @@
         Details
       </h3>
       <p>
-        There are two steps to using <em>thingy</em>: creating a <em>thingy</em> instance, and assigning the invocation function.
+        There are two steps to using the <em>thingy</em> library: creating an instance, and assigning the invocation function.
       </p>
       <ol>
         <li>
@@ -177,8 +177,8 @@
           </p>
           <pre><code>(make-thingy 97 98 99) ;; =&gt; [97 98 99]</code></pre>
           <p>
-            similar to using <code>vector</code>. (There is no analogous facility to making a vector literal.) Create a new instance from some other existing
-            collection like this.
+            similar to using <code>clojure.core/vector</code>. (There is no analogous facility to making a vector literal.) Create a new instance from some
+            other existing collection like this.
           </p>
           <pre><code>(into (make-thingy) #{:foo :bar :baz}) ;; =&gt; [:baz :bar :foo]</code></pre>
           <p>
@@ -203,7 +203,7 @@
           <pre><code>(defn-thingy yippee
 &nbsp; &quot;My docstring.&quot;
 &nbsp; {:added 1.2}
-&nbsp; [v x]
+&nbsp; [_ _]
 &nbsp; &quot;Hooray!&quot;)</code></pre>
           <p>
             This example assigns a 2-arity function that returns a string, ignoring its arguments. Observe.

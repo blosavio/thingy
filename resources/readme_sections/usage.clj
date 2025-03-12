@@ -27,7 +27,7 @@
                              :c (reverse x)))" 45 45)
            (newline-and-indent-after-chars 3 ["f)" "rld!\"" "inc x)"]))]
 
-  [:p "For this demonstration, that " [:code "condp"] " serves as a kind of crude lookup table, but " [:code "appli"] " could be anything, such as a higher-order function, or a recursive function, etc."]
+ [:p "For this demonstration, that " [:code "condp"] " serves as a kind of crude lookup table, but " [:code "appli"] " could be anything, such as a higher-order function, or a recursive function, etc."]
 
  [:p "Now we test out what we've done."]
 
@@ -40,7 +40,7 @@
 
  [:p "There's something we'd like to improve: We wanted to think of " [:code "Alice"] ", " [:code "Bob"] ", and " [:code "Charlie"] " as functions, so having " [:code "appli"] " sprinkled throughout kinda destroys that illusion."]
 
- [:p "Regular Clojure vectors " [:em "can"] " act as functions when at the head of an S-expression."]
+ [:p "Regular Clojure vectors have the capability to act as functions when at the head of an S-expression."]
 
  [:pre (print-form-then-eval "([97 98 99] 1)")]
 
@@ -61,7 +61,7 @@
   (print-form-then-eval "(nth (make-thingy 97 98 99) 1)") [:br]
   (print-form-then-eval "(conj (make-thingy 97 98 99) 100)")]
 
- [:p "That certainly " [:code "looks"] " like a vector. Each instance of a " [:em "thingy"] " implements the vector interface, so we have all the familiar functions like " [:code "count"] ", " [:code "conj"] ", etc."]
+ [:p "That certainly " [:em "looks"] " like a vector. Each instance of a " [:em "thingy"] " implements the vector interface, so we have all the familiar functions like " [:code "count"] ", " [:code "conj"] ", etc."]
 
  [:p "Now, let's re-define the our trio using " [:code "make-thingy"] "."]
 
@@ -99,14 +99,14 @@
 
  [:h3 "Details"]
 
- [:p "There are two steps to using " [:em "thingy"] ": creating a " [:em "thingy"] " instance, and assigning the invocation function."]
+ [:p "There are two steps to using the " [:em "thingy"] " library: creating an instance, and assigning the invocation function."]
 
  [:ol
   [:li [:p [:strong "Creating"] " and manipulating a " [:em "thingy"] " instance is analogous to that of vectors. To create, use " [:code "make-thingy"]]
 
    [:pre (print-form-then-eval "(make-thingy 97 98 99)")]
 
-   [:p "similar to using " [:code "vector"] ". (There is no analogous facility to making a vector literal.) Create a new instance from some other existing collection like this."]
+   [:p "similar to using " [:code "clojure.core/vector"] ". (There is no analogous facility to making a vector literal.) Create a new instance from some other existing collection like this."]
 
    [:pre (print-form-then-eval "(into (make-thingy) #{:foo :bar :baz})")]
 
@@ -129,13 +129,13 @@
    [:pre (-> (print-form-then-eval "(defn-thingy yippee
                                  \"My docstring.\"
                                  {:added 1.2}
-                                 [v x]
+                                 [_ _]
                                  \"Hooray!\")")
              (trim-evaluation)
              (newline-and-indent-after-chars 1 ["yippee"
                                                 "string.\""
                                                 "1.2}"
-                                                "x]"]))]
+                                                "_]"]))]
 
    [:p "This example assigns a 2-arity function that returns a string, ignoring its arguments. Observe."]
 
