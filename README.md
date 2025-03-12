@@ -1,16 +1,16 @@
 
   <body>
-    <a href="https://clojars.org/com.sagevlisuals/fn-thingy"><img src="https://img.shields.io/clojars/v/com.sagevlisuals/fn-thingy.svg"></a><br>
+    <a href="https://clojars.org/com.sagevlisuals/thingy"><img src="https://img.shields.io/clojars/v/com.sagevlisuals/thingy.svg"></a><br>
     <a href="#setup">Setup</a><br>
     <a href="https://blosavio.github.io/fn-thingy/index.html">API</a><br>
-    <a href="https://github.com/blosavio/fn-thingy/blob/main/changelog.md">Changelog</a><br>
+    <a href="https://github.com/blosavio/thingy/blob/main/changelog.md">Changelog</a><br>
     <a href="#intro">Introduction</a><br>
     <a href="#usage">Usage</a><br>
     <a href="#examples">Examples</a><br>
     <a href="#glossary">Glossary</a><br>
     <a href="https://github.com/blosavio">Contact</a><br>
     <h1>
-      fn-thingy
+      thingy
     </h1><em>A Clojure library that provides a bizarre function definition mechanism</em><br>
     <section id="setup">
       <h2>
@@ -19,11 +19,11 @@
       <h3>
         Leiningen/Boot
       </h3>
-      <pre><code>[com.sagevlisuals/fn-thingy &quot;0-SNAPSHOT0&quot;]</code></pre>
+      <pre><code>[com.sagevlisuals/thingy &quot;0-SNAPSHOT0&quot;]</code></pre>
       <h3>
         Clojure CLI/deps.edn
       </h3>
-      <pre><code>com.sagevlisuals/fn-thingy {:mvn/version &quot;0-SNAPSHOT0&quot;}</code></pre>
+      <pre><code>com.sagevlisuals/thingy {:mvn/version &quot;0-SNAPSHOT0&quot;}</code></pre>
       <h3>
         Require
       </h3>

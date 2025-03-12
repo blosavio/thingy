@@ -1,4 +1,4 @@
-(ns fn-thingy.core-test
+(ns thingy.core-test
   "Note: `$ lein test :all` at the command line evaluates tests in parallel.
   During those evaluations, there may be contention for setting the `options`
   atom. Therefore, each unit test that calls an altered method --- .toString()
@@ -7,7 +7,7 @@
   When each test namespace is evaluated individually, all tests run in sequence,
   isolated from one another."
   (:require [clojure.test :refer [deftest is are testing run-tests]]
-            [fn-thingy.core :refer :all]))
+            [thingy.core :refer :all]))
 
 
 ;; Note: Testing macroexpansion from lein requires precise namespacing. When
@@ -27,19 +27,19 @@
                       [arg1 arg2 arg3]
                       (concat arg1 arg2 arg2)))
 
-    `(do (clojure.core/defn fn-thingy.core-test/foo
+    `(do (clojure.core/defn thingy.core-test/foo
            "doc-string" {:metadata "val"}
-           [fn-thingy.core-test/arg1 fn-thingy.core-test/arg2 fn-thingy.core-test/arg3]
-           (clojure.core/concat fn-thingy.core-test/arg1 fn-thingy.core-test/arg2 fn-thingy.core-test/arg2))
-         (fn-thingy.dangerous-vector/reset!-options
-          {:fn fn-thingy.core-test/foo,
+           [thingy.core-test/arg1 thingy.core-test/arg2 thingy.core-test/arg3]
+           (clojure.core/concat thingy.core-test/arg1 thingy.core-test/arg2 thingy.core-test/arg2))
+         (thingy.dangerous-vector/reset!-options
+          {:fn thingy.core-test/foo,
            :right-delimiter "]",
            :left-delimiter "["}))))
 
 
 (defn test-invoke-while-locked
   "Evaluates the `.invoke()` instance method of AlternateFunctionInvokePersistentVector
- `v` in a locking context."
+  `v` in a locking context."
   {:UUIDv4 #uuid "26e9ae56-6ef6-4d70-b4fc-2f979220e0da"}
   [v1 v2 v3]
   (let [lock (Object.)]
@@ -52,15 +52,15 @@
       (v1 v2 v3))))
 
 
-(deftest make-fn-thingy-tests
+(deftest make-thingy-tests
   (testing "basic creation"
     (are [x y] (= x y)
-      [] (make-fn-thingy)
-      [:a :b :c] (make-fn-thingy :a :b :c)))
-  (testing "fn-thingy invocation"
-    (let [X (make-fn-thingy :a :b)
-          Y (make-fn-thingy :c :d)
-          Z (make-fn-thingy :e :f)]
+      [] (make-thingy)
+      [:a :b :c] (make-thingy :a :b :c)))
+  (testing "thingy invocation"
+    (let [X (make-thingy :a :b)
+          Y (make-thingy :c :d)
+          Z (make-thingy :e :f)]
       (are [x y] (= x y)
         (test-invoke-while-locked X Y Z) [:a :b :c :d :e :f]
         (test-invoke-while-locked Y Z X) [:c :d :e :f :a :b]

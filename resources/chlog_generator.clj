@@ -16,4 +16,4 @@
 (defn -main
   [& args]
   {:UUIDv4 #uuid "5278c15f-6986-4868-b38a-e47234f19669"}
-  (println "generated Chlog changelog"))
+  (println "generated thingy changelog"))

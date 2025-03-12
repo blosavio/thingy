@@ -1,4 +1,4 @@
-(ns fn-thingy.utilities)
+(ns thingy.utilities)
 
 
 (defn scaffold

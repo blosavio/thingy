@@ -18,15 +18,6 @@
 (def readmoi-options (load-file "resources/readmoi_options.edn"))
 
 
-(generate-all project-metadata readmoi-options)
-
-
-(defn -main
-  [& args]
-  {:UUIDv4 #uuid "60f00c64-6480-42df-9181-3048da80db73"}
-  (println "generated fn-thingy ReadMe docs"))
-
-
 ;;;; utilities
 
 (defn trim-evaluation
@@ -45,3 +36,14 @@
   [b n chars]
   (let [adjusted-str (reduce #(clojure.string/replace %1 %2 (str %2 "\n"  (clojure.string/join (repeat n " ")))) (nth b 1) chars)]
     (assoc b 1 adjusted-str)))
+
+
+;;;; generators
+
+(generate-all project-metadata readmoi-options)
+
+
+(defn -main
+  [& args]
+  {:UUIDv4 #uuid "60f00c64-6480-42df-9181-3048da80db73"}
+  (println "generated fn-thingy ReadMe docs"))

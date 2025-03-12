@@ -1,7 +1,7 @@
 
   <body>
     <h1>
-      fn-thingy library changelog
+      thingy library changelog
     </h1><a href="https://github.com/blosavio/chlog">changelog info</a>
     <section>
       <h3>
@@ -30,7 +30,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 March 10.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 March 12.<span id="uuid"><br>
       c8842399-457e-447a-83b0-861b8946f623</span>
     </p>
   </body>

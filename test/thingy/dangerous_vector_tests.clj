@@ -1,4 +1,4 @@
-(ns fn-thingy.dangerous-vector-tests
+(ns thingy.dangerous-vector-tests
   "Tests in SECTION ONE sourced from Clojure's vector test suite [clojure.test-clojure.vectors](https://github.com/clojure/clojure/blob/clojure-1.12.0/test/clojure/test_clojure/vectors.clj),
   version 1.12.0, retrieved on 2025 March 03.
 
@@ -13,7 +13,7 @@
   isolated from one another."
   (:require
    [clojure.test :refer [are is deftest run-tests testing]]
-   [fn-thingy.dangerous-vector :refer :all])
+   [thingy.dangerous-vector :refer :all])
   (:import
    [java.util Collection Spliterator]
    [java.util.function Consumer]

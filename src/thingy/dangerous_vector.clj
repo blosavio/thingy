@@ -1,4 +1,4 @@
-(ns fn-thingy.dangerous-vector
+(ns thingy.dangerous-vector
   "WARNING: Unless you are the author of this library, you almost certainly
   don't want to use this namespace. The items provided here diverge from
   typical Clojure semantics and are intended for a very specific case that is
@@ -33,7 +33,7 @@
 
   (.toString dangerous-vector) ;; \"⟨1 2 3⟩\"
   ```"
-  (:require [fn-thingy.utilities :refer [scaffold print-n-newlines]]))
+  (:require [thingy.utilities :refer [scaffold print-n-newlines]]))
 
 
 (import com.sagevisuals.AltFnInvocablePersistentVector)

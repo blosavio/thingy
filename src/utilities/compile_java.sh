@@ -7,6 +7,6 @@
 
 # The `@` files do not shell-expand (e.g., ~ for /home/<user>/), and pathnames that contain spaces must be double-quoted.
 
-javac -d @src/utilities/javac_destination -cp @src/utilities/javac_classpath src/com/sagevisuals/fn_thingy/AltFnInvocablePersistentVector.java
+javac -d @src/utilities/javac_destination -cp @src/utilities/javac_classpath src/com/sagevisuals/thingy/AltFnInvocablePersistentVector.java
 
 exit 0
