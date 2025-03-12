@@ -1,4 +1,4 @@
-(defproject com.sagevlisuals/thingy "0-SNAPSHOT0"
+(defproject com.sagevisuals/thingy "0-SNAPSHOT0"
   :description "A Clojure library that provides a bizarre function definition"
   :url "https://github.com/blosavio/thingy"
   :license {:name "MIT License"

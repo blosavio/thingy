@@ -1,6 +1,6 @@
 
   <body>
-    <a href="https://clojars.org/com.sagevlisuals/thingy"><img src="https://img.shields.io/clojars/v/com.sagevlisuals/thingy.svg"></a><br>
+    <a href="https://clojars.org/com.sagevisuals/thingy"><img src="https://img.shields.io/clojars/v/com.sagevisuals/thingy.svg"></a><br>
     <a href="#setup">Setup</a><br>
     <a href="https://blosavio.github.io/thingy/index.html">API</a><br>
     <a href="https://github.com/blosavio/thingy/blob/main/changelog.md">Changelog</a><br>
@@ -19,11 +19,11 @@
       <h3>
         Leiningen/Boot
       </h3>
-      <pre><code>[com.sagevlisuals/thingy &quot;0-SNAPSHOT0&quot;]</code></pre>
+      <pre><code>[com.sagevisuals/thingy &quot;0-SNAPSHOT0&quot;]</code></pre>
       <h3>
         Clojure CLI/deps.edn
       </h3>
-      <pre><code>com.sagevlisuals/thingy {:mvn/version &quot;0-SNAPSHOT0&quot;}</code></pre>
+      <pre><code>com.sagevisuals/thingy {:mvn/version &quot;0-SNAPSHOT0&quot;}</code></pre>
       <h3>
         Require
       </h3>
