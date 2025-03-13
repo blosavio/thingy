@@ -32,8 +32,7 @@
   (dangerous-vector [97 98 99]) ;; (1 2 3 97 98 99)
 
   (.toString dangerous-vector) ;; \"⟨1 2 3⟩\"
-  ```"
-  (:require [thingy.utilities :refer [scaffold print-n-newlines]]))
+  ```")
 
 
 (import com.sagevisuals.AltFnInvocablePersistentVector)
