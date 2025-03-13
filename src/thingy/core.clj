@@ -1,9 +1,6 @@
 (ns thingy.core
   "Define and instantiate thingys."
   (:require [thingy.dangerous-vector :refer [alt-fn-vec
-                                             alt-fn-vector
-                                             defaultize!-options
-                                             options
                                              reset!-options]]))
 
 
