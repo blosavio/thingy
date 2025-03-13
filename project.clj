@@ -1,4 +1,4 @@
-(defproject com.sagevisuals/thingy "0-SNAPSHOT2"
+(defproject com.sagevisuals/thingy "0"
   :description "A Clojure library that provides a bizarre function definition"
   :url "https://github.com/blosavio/thingy"
   :license {:name "MIT License"
@@ -20,5 +20,5 @@
           :output-path "doc"
           :source-uri "https://github.com/blosavio/thingy/blob/main/{filepath}#L{line}"
           :html {:transforms [[:div.sidebar.primary] [:append [:ul.index-link [:li.depth-1 [:a {:href "https://github.com/blosavio/thingy"} "Project Home"]]]]]}
-          :project {:name "thingy" :version "version 0-SNAPSHOT2"}}
+          :project {:name "thingy" :version "version 0"}}
   :scm {:name "git" :url "https://github.com/blosavio/thingy"})
