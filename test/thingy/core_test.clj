@@ -19,24 +19,6 @@
 ;; See https://github.com/technomancy/leiningen/issues/912
 
 
-#_(deftest defn-thingy-macroexpansion
-  (are [x y] (= x y)
-    (macroexpand-1 `(defn-thingy foo
-                      "doc-string"
-                      {:metadata "val"}
-                      [arg1 arg2 arg3]
-                      (concat arg1 arg2 arg2)))
-
-    `(do (clojure.core/defn thingy.core-test/foo
-           "doc-string" {:metadata "val"}
-           [thingy.core-test/arg1 thingy.core-test/arg2 thingy.core-test/arg3]
-           (clojure.core/concat thingy.core-test/arg1 thingy.core-test/arg2 thingy.core-test/arg2))
-         (thingy.dangerous-vector/reset!-options
-          {:fn thingy.core-test/foo,
-           :right-delimiter "]",
-           :left-delimiter "["}))))
-
-
 (defn foo-test
   {:UUIDv4 #uuid "618a3284-abac-4771-90ed-8aa273351120"}
   [a b c]
