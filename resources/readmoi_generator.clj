@@ -31,7 +31,8 @@
 
 
 (defn newline-and-indent-after-chars
-  "Update a `print-form-then-eval` code block by inserting a newline, and `n` spaces after characters in `chars`."
+  "Update a `print-form-then-eval` code block by inserting a newline, and `n`
+  spaces after characters in `chars`."
   {:UUIDv4 #uuid "eda4200c-cb05-4061-96e5-a913010edc1f"}
   [b n chars]
   (let [adjusted-str (reduce #(clojure.string/replace %1 %2 (str %2 "\n"  (clojure.string/join (repeat n " ")))) (nth b 1) chars)]

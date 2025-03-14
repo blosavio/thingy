@@ -13,4 +13,4 @@
 
   [:dd [:p "The function that is invoked when evaluating an S-expression with a " [:a {:href "#instance"} [:em "thingy"] " instance"] " at the head. In all respects, a standard Clojure function, that may be called from any site."]
 
-   [:p "Defined with " [:code "defn-thingy"] "."]]]]
+   [:p "Defined with regular Clojure machinery, i.e., " [:code "defn"] "."]]]]

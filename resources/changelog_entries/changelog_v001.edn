@@ -1,0 +1,25 @@
+{:date {:year 2025
+        :month "March"
+        :day 14}
+ :responsible {:name "Brad Losavio"
+               :email "blosavio@sagevisuals.com"}
+ :version 1
+ :comment "Changed API to remove mis-leading `defn`-prefixed function. This also has the benefit of de-complecting function definition and thingy invocation assignment."
+ :project-status :active
+ :stable false
+ :urgency :medium
+ :breaking? true
+ :changes [{:description "Removed `defn-thingy`."
+            :date {:year 2025
+                   :month "March"
+                   :day 14}
+            :change-type :removed-functions
+            :removed-functions ['defn-thingy]
+            :breaking? true}
+           {:description "Added `assign-thingy-fn!` to replace `defn-thingy`."
+            :date {:year 2025
+                   :month "March"
+                   :day 14}
+            :change-type :added-functions
+            :added-functions ['assign-thingy-fn!]
+            :breaking? false}]}

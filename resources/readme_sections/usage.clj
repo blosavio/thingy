@@ -18,29 +18,29 @@
   (print-form-then-eval "(def Bob [:b])") [:br]
   (print-form-then-eval "(def Charlie [:c])")]
 
- [:p "Let's write an application function, whose name we'll intentionally mis-spell as " [:code "appli"] " so that we don't shadow " [:code "clojure.core/apply"] ". " [:code "appli"] " dispatches on argument " [:code "f"] "'s first element."]
+ [:p "Let's write a function, " [:code "application"] ", which dispatches on argument " [:code "f"] "'s first element."]
 
- [:pre (-> (print-form-then-eval "(defn appli [f x]
+ [:pre (-> (print-form-then-eval "(defn application [f x]
                               (condp = (first f)
                              :a \"Hello, World!\"
                              :b (inc x)
                              :c (reverse x)))" 45 45)
            (newline-and-indent-after-chars 3 ["f)" "rld!\"" "inc x)"]))]
 
- [:p "For this demonstration, that " [:code "condp"] " serves as a kind of crude lookup table, but " [:code "appli"] " could be anything, such as a higher-order function, or a recursive function, etc."]
+ [:p "For this demonstration, that " [:code "condp"] " serves as a kind of crude lookup table, but " [:code "application"] " could be anything, such as a higher-order function, or a recursive function, etc."]
 
  [:p "Now we test out what we've done."]
 
  [:pre
-  (print-form-then-eval "(appli Alice :an-ignored-arg)") [:br] [:br]
-  (print-form-then-eval "(appli Bob 99)") [:br] [:br]
-  (print-form-then-eval "(appli Charlie [:chocolate :strawberry :vanilla])" 85 75)]
+  (print-form-then-eval "(application Alice :an-ignored-arg)") [:br] [:br]
+  (print-form-then-eval "(application Bob 99)") [:br] [:br]
+  (print-form-then-eval "(application Charlie [:chocolate :strawberry :vanilla])" 85 75)]
 
  [:p "That looks promising. " [:code "Alice"] " returns string " [:code "Hello, World!"] " regardless of the argument, " [:code "Bob"] " increments the numeric argument, and " [:code "Charlie"] " indeed reverses the sequence passed as the next argument."]
 
- [:p "There's something we'd like to improve: We wanted to think of " [:code "Alice"] ", " [:code "Bob"] ", and " [:code "Charlie"] " as functions, so having " [:code "appli"] " sprinkled throughout kinda destroys that illusion."]
+ [:p "There's something we'd like to improve: We wanted to think of " [:code "Alice"] ", " [:code "Bob"] ", and " [:code "Charlie"] " as functions, so having the symbol \"application\" sprinkled throughout kinda destroys that illusion."]
 
- [:p "Regular Clojure vectors have the capability to act as functions when at the head of an S-expression."]
+ [:p "Perhaps we could leverage the fact that regular Clojure vectors have the capability to act as functions when at the head of an S-expression."]
 
  [:pre (print-form-then-eval "([97 98 99] 1)")]
 
@@ -48,9 +48,9 @@
 
  [:pre (print-form-then-eval "(nth [97 98 99] 1)")]
 
- [:p "For our Alice/Bob/Charlie trio, we'd like for there to be instead an implied " [:code "appli"] "."]
+ [:p "For our Alice/Bob/Charlie trio, we'd like for there to be instead an implied " [:code "application"] "."]
 
- [:p "To do that, let's introduce a new utility, " [:code "make-thingy"] "."]
+ [:p "To do that, let's introduce a new utility, " [:code "make-thingy"] ", which creates a vector-like object."]
 
  [:pre (print-form-then-eval "(make-thingy 97 98 99)")]
 
@@ -78,15 +78,13 @@
 
  [:pre (print-form-then-eval "(Alice 0)")]
 
- [:p "Hmm. It appears to behave like a regular vector, with an implicit " [:code "nth"] ". This is the default."]
+ [:p "Hmm. It appears to behave like a regular vector, with an implicit " [:code "nth"] ". This is, in fact, the default."]
 
- [:p "Next, we'll re-set the invocation behavior of all instances of " [:em "thingy"] "s to " [:code "appli"] " using another utility, " [:code "defn-thingy"] ". It looks pretty much like " [:code "defn"] "."]
+ [:p "Next, we'll re-set the invocation behavior of all instances of " [:em "thingy"] "s to " [:code "application"] " using another utility, " [:code "assign-thingy-fn!"] "."]
 
- [:pre (-> (print-form-then-eval "(defn-thingy my-appli \"doc string\" {:metadata \"foo\"} [f x] (appli f x))")
-           trim-evaluation
-           (newline-and-indent-after-chars 1 ["my-appli" "ing\"" "}" "x]"]))]
+ [:pre (print-form-then-eval "(assign-thingy-fn! application)")]
 
- [:p [:code "defn-thingy"] " mutates the invocation behavior for all " [:em "thingy"] " instances."]
+ [:p [:code "assign-thingy-fn!"] " mutates the invocation behavior for all " [:em "thingy"] " instances."]
 
  [:p "Let's see how our trio behaves."]
 
@@ -95,11 +93,11 @@
   (print-form-then-eval "(Bob 99)") [:br] [:br]
   (print-form-then-eval "(Charlie [:chocolate :strawberry :vanilla])")]
 
- [:p "Now our " [:code "Alice"] ", " [:code "Bob"] ", and " [:code "Charlie"] " thingys behave like functions."]
+ [:p "Now our " [:code "Alice"] ", " [:code "Bob"] ", and " [:code "Charlie"] " " [:em "thingy"] "s behave like functions."]
 
  [:h3 "Details"]
 
- [:p "There are two steps to using the " [:em "thingy"] " library: creating an instance, and assigning the invocation function."]
+ [:p "There are three steps to using the " [:em "thingy"] " library: creating an instance, defining an invocation function, and assigning that invocation function."]
 
  [:ol
   [:li [:p [:strong "Creating"] " and manipulating a " [:em "thingy"] " instance is analogous to that of vectors. To create, use " [:code "make-thingy"]]
@@ -124,32 +122,29 @@
 
    [:pre (print-form-then-eval "(type (map inc (make-thingy 97 98 99)))")]]
 
-  [:li [:p [:strong "Assigning"] " a " [:em "thingy"] " invocation function is analogous to using " [:code "defn"] ". One difference is that supplying a doc-string and metadata are required. (Feel free to leave them empty, though.)"]
+  [:li [:p [:strong "Defining"] " a " [:em "thingy"] " invocation function is merely typical Clojure function definition, e.g., using " [:code "defn"] "."]
 
-   [:pre (-> (print-form-then-eval "(defn-thingy yippee
-                                 \"My docstring.\"
-                                 {:added 1.2}
+   [:pre (-> (print-form-then-eval "(defn yippee
                                  [_ _]
                                  \"Hooray!\")")
-             (trim-evaluation)
-             (newline-and-indent-after-chars 1 ["yippee"
-                                                "string.\""
-                                                "1.2}"
-                                                "_]"]))]
+             (newline-and-indent-after-chars 2 ["yippee" "_]"]))]
+   
+   [:p "This example defines a 2-arity function that returns a string, ignoring its arguments. Observe."]
 
-   [:p "This example assigns a 2-arity function that returns a string, ignoring its arguments. Observe."]
+   [:pre (print-form-then-eval "(yippee (make-thingy 1.23 4.56) 22/7)")]
+
+   [:p "The invocation function must have an arity of zero to nine. When there is at least one argument, the " [:em "thingy"] " instance is passed as the first argument, followed by up to eight trailing arguments."]]
+
+  [:li [:p [:strong "Assigning"] " a " [:em "thingy"] " invocation functions uses " [:code "assign-thingy-fn!"] ". "]
+
+   [:pre (-> (print-form-then-eval "(assign-thingy-fn! yippee)")
+             trim-evaluation)]
+   
+   [:p "Evaluating " [:code "assign-thingy-fn!"] " synchronously mutates the invocation function for all " [:em "thingy"] " instances."]
+
+   [:p "Now, any " [:em "thingy"] " instance, when at the head of an S-expression, will implicitly invoke " [:code "yippee"] "."]
 
    [:pre
-    (print-form-then-eval "((make-thingy) 99)") [:br]
-    (print-form-then-eval "((make-thingy :a :b :c) :foo)") [:br]
-    (print-form-then-eval "((make-thingy 1.23 4.56) 22/7)")]
-
-   [:p "The function is accessible in the same manner as any other var in the namespace."]
-
-   [:p "The name has no affect on the operation of " [:em "thingy"] " instances, but is provided so that the function may be invoked manually, like this."]
-
-   [:pre (print-form-then-eval "(yippee :a :b)")]
-
-   [:p "Evaluating " [:code "defn-thingy"] " synchronously mutates the invocation function for all " [:em "thingy"] " instances."]
-
-   [:p "The invocation function may have an arity of zero to eight, inclusive. When there is at least one argument, the " [:em "thingy"] " instance is passed as the first argument."]]]]
+    (print-form-then-eval "(def X (make-thingy 1 2 3))")
+    [:br] [:br]
+    (print-form-then-eval "(X :an-ignored-arg)")]]]]

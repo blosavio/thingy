@@ -19,7 +19,7 @@
 ;; See https://github.com/technomancy/leiningen/issues/912
 
 
-(deftest defn-thingy-macroexpansion
+#_(deftest defn-thingy-macroexpansion
   (are [x y] (= x y)
     (macroexpand-1 `(defn-thingy foo
                       "doc-string"
@@ -37,6 +37,12 @@
            :left-delimiter "["}))))
 
 
+(defn foo-test
+  {:UUIDv4 #uuid "618a3284-abac-4771-90ed-8aa273351120"}
+  [a b c]
+  (concat a b c))
+
+
 (defn test-invoke-while-locked
   "Evaluates the `.invoke()` instance method of AlternateFunctionInvokePersistentVector
   `v` in a locking context."
@@ -44,11 +50,7 @@
   [v1 v2 v3]
   (let [lock (Object.)]
     (locking lock
-      (defn-thingy foo-test
-        "Foo docstring"
-        {:added 1.2}
-        [a b c]
-        (concat a b c))
+      (assign-thingy-fn! foo-test)
       (v1 v2 v3))))
 
 

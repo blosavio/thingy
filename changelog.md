@@ -5,6 +5,51 @@
     </h1><a href="https://github.com/blosavio/chlog">changelog info</a>
     <section>
       <h3>
+        version 1
+      </h3>
+      <p>
+        2025 March 14<br>
+        Brad Losavio (blosavio@sagevisuals.com)<br>
+        <em>Description:</em> Changed API to remove mis-leading `defn`-prefixed function. This also has the benefit of de-complecting function definition and
+        thingy invocation assignment.<br>
+        <em>Project status:</em> <a href="https://github.com/metosin/open-source/blob/main/project-status.md">active</a><br>
+        <em>Urgency:</em> medium<br>
+        <em>Breaking:</em> yes
+      </p>
+      <p></p>
+      <div>
+        <em>added functions:</em> <code>assign-thingy-fn!</code>
+      </div>
+      <div>
+        <em>removed functions:</em> <code>defn-thingy</code>
+      </div>
+      <p></p>
+      <div>
+        <h4>
+          Breaking changes
+        </h4>
+        <ul>
+          <li>
+            <div>
+              Removed `defn-thingy`
+            </div>
+          </li>
+        </ul>
+        <h4>
+          Non-breaking changes
+        </h4>
+        <ul>
+          <li>
+            <div>
+              Added `assign-thingy-fn!` to replace `defn-thingy`.
+            </div>
+          </li>
+        </ul>
+      </div>
+      <hr>
+    </section>
+    <section>
+      <h3>
         version 0
       </h3>
       <p>
@@ -30,7 +75,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 March 13.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 March 14.<span id="uuid"><br>
       c8842399-457e-447a-83b0-861b8946f623</span>
     </p>
   </body>

@@ -4,11 +4,11 @@
   typical Clojure semantics and are intended for a very specific case that is
   unusual. All other uses are strongly discouraged.
 
-  This namespace provides instances of vectors with dynamically-setable function
-  invocation when they appear in the first element in an S-expression. The
-  `toString` method is also dynamically setable to indicate that the vectors
-  are altered. All other behaviors are identical to Clojure's built-in persitent
-  vectors.
+  This namespace provides instances of vectors with dynamically-settable
+  function invocation when they appear in the first element in an S-expression.
+  The `toString` method is also dynamically settable to indicate that the
+  vectors are altered. All other behaviors are identical to Clojure's built-in
+  persistent vectors.
 
   Examples
   ```clojure
@@ -20,11 +20,11 @@
   (count dangerous-vector) ;; 3
   ```
 
-  Change the invocaton function.
+  Change the invocation function.
   ```clojure
   (reset!-options {:fn (fn [v1 v2] (concat v1 v2))
-                 :left-delimiter \"⟨\"
-                 :right-delimiter \"⟩\"})
+                   :left-delimiter \"⟨\"
+                   :right-delimiter \"⟩\"})
   ```
 
   Now, the `invoke` and `toString` behavior is altered.
@@ -38,15 +38,20 @@
 (import com.sagevisuals.AltFnInvocablePersistentVector)
 
 
-(defonce default-options {:fn nth
-                          :left-delimiter "⟨"
-                          :right-delimiter "⟩"})
+(def ^{:no-doc true} default-options-docstring
+  "A `defonce`-d map with keys `:fn`, `:left-delimiter`, and `:right-delimiter`.")
+
+
+(defonce ^{:doc default-options-docstring} default-options {:fn nth
+                                                            :left-delimiter "⟨"
+                                                            :right-delimiter "⟩"})
 
 
 (defn options-validator
   "Given hash-map `m`, returns `true` if the `:fn` value is a function, and if
   the `:left-delimiter` and `:right-delimiter` values are strings."
-  {:UUIDv4 #uuid "678a3cbc-a1c0-4ef8-9a0e-58d3a2d49410"}
+  {:UUIDv4 #uuid "678a3cbc-a1c0-4ef8-9a0e-58d3a2d49410"
+   :no-doc true}
   [m]
   (and (contains? m :fn)
        (contains? m :left-delimiter)
@@ -56,17 +61,15 @@
        (string? (:right-delimiter m))))
 
 
-(def options (atom default-options :validator options-validator))
+(def ^{:no-doc true} options (atom default-options :validator options-validator))
 
 
 (defn reset!-options
   "Resets options to map `m`. `m` must associate the following key-vals:
 
-  * `:fn`               a function
-  * `:left-delimiter`   a string
-  * `:right-delimiter` a string
-
-  Note: `m` must be coerced into a clojure.lang.PersistentHashMap."
+  * `:fn`              a function
+  * `:left-delimiter`  a string
+  * `:right-delimiter` a string"
   {:UUIDv4 #uuid "1f51852b-56cf-4387-b9d9-d0a91703ca81"}
   [m]
   (reset! options m))
@@ -83,7 +86,12 @@
   "Creates a new vector containing the args. The returned vector has a
   modifiable function behavior (defaults to `nth`).
 
-  Analogous to `clojure.core.vector`."
+  Analogous to [`clojure.core/vector`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/vector).
+
+  Example:
+  ```
+  (alt-fn-vector 1 2 3) ;; => [1 2 3]
+  ```"
   {:UUIDv4 #uuid "7208362c-3d06-41c6-97cf-3bc068c21632"}
   ([]                   (. com.sagevisuals.AltFnInvocablePersistentVector (create options (list))))
   ([a]                  (. com.sagevisuals.AltFnInvocablePersistentVector (create options (cons a (list)))))
@@ -98,8 +106,13 @@
 (defn alt-fn-vec
   "Creates a new vector containing the contents of collection `c`.
 
-  Analogous to `clojure.core.vec`, but does not currently handle Java arrays in
-  the same manner."
+  Analogous to [`clojure.core/vec`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/vec)
+  , but does not currently handle Java arrays in the same manner.
+
+  Example:
+  ```clojure
+  (alt-fn-vec #{1 2 3}) ;; => [1 3 2]
+  ```"
   {:UUIDv4 #uuid "916f21ca-636b-4d0a-b72c-87b445e0145b"}
   [c]
   (apply alt-fn-vector c))

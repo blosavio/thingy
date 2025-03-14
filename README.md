@@ -19,15 +19,15 @@
       <h3>
         Leiningen/Boot
       </h3>
-      <pre><code>[com.sagevisuals/thingy &quot;0&quot;]</code></pre>
+      <pre><code>[com.sagevisuals/thingy &quot;1&quot;]</code></pre>
       <h3>
         Clojure CLI/deps.edn
       </h3>
-      <pre><code>com.sagevisuals/thingy {:mvn/version &quot;0&quot;}</code></pre>
+      <pre><code>com.sagevisuals/thingy {:mvn/version &quot;1&quot;}</code></pre>
       <h3>
         Require
       </h3>
-      <pre><code>(require &apos;[thingy.core :refer [defn-thingy make-thingy]])</code></pre>
+      <pre><code>(require &apos;[thingy.core :refer [assign-thingy-fn! make-thingy]])</code></pre>
     </section>
     <section id="intro">
       <h2>
@@ -40,21 +40,24 @@
       <p>
         A <em>thingy</em> instance, when appearing at the head of an S-expression serves as a function, consuming the arguments contained in the tail and
         yielding a value. Unlike a typical function, the internal structure of a <em>thingy</em> is manipulatable with all the functions that make up the
-        vector interface.
+        vector interface. Such objects may be used in <a href="#examples">academic programming languages</a> that explore using sequential collections of
+        values to define functions.
       </p>
       <p>
-        Such objects may be used in <a href="#examples">academic programming languages</a> that explore using sequential collections of values to define
-        functions. It is certainly possible to write
+        Sure, it&apos;s possible to write
       </p>
       <pre><code>(application-function vector arg1 arg2...)</code></pre>
       <p>
-        where <code>application-function</code> provides some kind of logic about how to interpret <code>vector</code>. But having
-        <code>application-function</code> scattered around is visually distracting. Instead of plainly representing the concepts, the machinery is leaking onto
-        the page. It is much nicer to write
+        where <code>application-function</code> provides some kind of logic about how to interpret <code>vector</code>. But having the symbol
+        &quot;application-function&quot; scattered around is visually distracting. Instead of plainly representing the concepts, the machinery is leaking onto
+        the page.
+      </p>
+      <p>
+        It is much nicer to write
       </p>
       <pre><code>(fn-vec arg1 arg2...)</code></pre>
       <p>
-        as well to read and to understand. The <em>thingy</em> library enables such streamlining.
+        as well to read and to understand: <code>fn-vec</code> is the operator. The <em>thingy</em> library enables such streamlining.
       </p>
     </section>
     <section id="usage">
@@ -84,23 +87,22 @@
       </p>
       <pre><code>(def Alice [:a])</code><br><code>(def Bob [:b])</code><br><code>(def Charlie [:c])</code></pre>
       <p>
-        Let&apos;s write an application function, whose name we&apos;ll intentionally mis-spell as <code>appli</code> so that we don&apos;t shadow
-        <code>clojure.core/apply</code>. <code>appli</code> dispatches on argument <code>f</code>&apos;s first element.
+        Let&apos;s write a function, <code>application</code>, which dispatches on argument <code>f</code>&apos;s first element.
       </p>
-      <pre><code>(defn appli
+      <pre><code>(defn application
 &nbsp; [f x]
 &nbsp; (condp = (first f)
 &nbsp;   :a &quot;Hello, World!&quot;
 &nbsp;   :b (inc x)
 &nbsp;   :c (reverse x)))</code></pre>
       <p>
-        For this demonstration, that <code>condp</code> serves as a kind of crude lookup table, but <code>appli</code> could be anything, such as a
+        For this demonstration, that <code>condp</code> serves as a kind of crude lookup table, but <code>application</code> could be anything, such as a
         higher-order function, or a recursive function, etc.
       </p>
       <p>
         Now we test out what we&apos;ve done.
       </p>
-      <pre><code>(appli Alice :an-ignored-arg) ;; =&gt; &quot;Hello, World!&quot;</code><br><br><code>(appli Bob 99) ;; =&gt; 100</code><br><br><code>(appli Charlie [:chocolate :strawberry :vanilla])
+      <pre><code>(application Alice :an-ignored-arg) ;; =&gt; &quot;Hello, World!&quot;</code><br><br><code>(application Bob 99) ;; =&gt; 100</code><br><br><code>(application Charlie [:chocolate :strawberry :vanilla])
 ;; =&gt; (:vanilla :strawberry :chocolate)</code></pre>
       <p>
         That looks promising. <code>Alice</code> returns string <code>Hello, World!</code> regardless of the argument, <code>Bob</code> increments the numeric
@@ -108,10 +110,10 @@
       </p>
       <p>
         There&apos;s something we&apos;d like to improve: We wanted to think of <code>Alice</code>, <code>Bob</code>, and <code>Charlie</code> as functions, so
-        having <code>appli</code> sprinkled throughout kinda destroys that illusion.
+        having the symbol &quot;application&quot; sprinkled throughout kinda destroys that illusion.
       </p>
       <p>
-        Regular Clojure vectors have the capability to act as functions when at the head of an S-expression.
+        Perhaps we could leverage the fact that regular Clojure vectors have the capability to act as functions when at the head of an S-expression.
       </p>
       <pre><code>([97 98 99] 1) ;; =&gt; 98</code></pre>
       <p>
@@ -119,10 +121,10 @@
       </p>
       <pre><code>(nth [97 98 99] 1) ;; =&gt; 98</code></pre>
       <p>
-        For our Alice/Bob/Charlie trio, we&apos;d like for there to be instead an implied <code>appli</code>.
+        For our Alice/Bob/Charlie trio, we&apos;d like for there to be instead an implied <code>application</code>.
       </p>
       <p>
-        To do that, let&apos;s introduce a new utility, <code>make-thingy</code>.
+        To do that, let&apos;s introduce a new utility, <code>make-thingy</code>, which creates a vector-like object.
       </p>
       <pre><code>(make-thingy 97 98 99) ;; =&gt; [97 98 99]</code></pre>
       <p>
@@ -142,19 +144,18 @@
       </p>
       <pre><code>(Alice 0) ;; =&gt; :a</code></pre>
       <p>
-        Hmm. It appears to behave like a regular vector, with an implicit <code>nth</code>. This is the default.
+        Hmm. It appears to behave like a regular vector, with an implicit <code>nth</code>. This is, in fact, the default.
       </p>
       <p>
-        Next, we&apos;ll re-set the invocation behavior of all instances of <em>thingy</em>s to <code>appli</code> using another utility,
-        <code>defn-thingy</code>. It looks pretty much like <code>defn</code>.
+        Next, we&apos;ll re-set the invocation behavior of all instances of <em>thingy</em>s to <code>application</code> using another utility,
+        <code>assign-thingy-fn!</code>.
       </p>
-      <pre><code>(defn-thingy my-appli
-&nbsp; &quot;doc string&quot;
-&nbsp; {:metadata &quot;foo&quot;}
-&nbsp; [f x]
-&nbsp; (appli f x))</code></pre>
+      <pre><code>(assign-thingy-fn! application)
+;; =&gt; {:fn application,
+;;     :left-delimiter &quot;[&quot;,
+;;     :right-delimiter &quot;]&quot;}</code></pre>
       <p>
-        <code>defn-thingy</code> mutates the invocation behavior for all <em>thingy</em> instances.
+        <code>assign-thingy-fn!</code> mutates the invocation behavior for all <em>thingy</em> instances.
       </p>
       <p>
         Let&apos;s see how our trio behaves.
@@ -162,13 +163,14 @@
       <pre><code>(Alice :an-ignored-arg) ;; =&gt; &quot;Hello, World!&quot;</code><br><br><code>(Bob 99) ;; =&gt; 100</code><br><br><code>(Charlie [:chocolate :strawberry :vanilla])
 ;; =&gt; (:vanilla :strawberry :chocolate)</code></pre>
       <p>
-        Now our <code>Alice</code>, <code>Bob</code>, and <code>Charlie</code> thingys behave like functions.
+        Now our <code>Alice</code>, <code>Bob</code>, and <code>Charlie</code> <em>thingy</em>s behave like functions.
       </p>
       <h3>
         Details
       </h3>
       <p>
-        There are two steps to using the <em>thingy</em> library: creating an instance, and assigning the invocation function.
+        There are three steps to using the <em>thingy</em> library: creating an instance, defining an invocation function, and assigning that invocation
+        function.
       </p>
       <ol>
         <li>
@@ -197,32 +199,32 @@
         </li>
         <li>
           <p>
-            <strong>Assigning</strong> a <em>thingy</em> invocation function is analogous to using <code>defn</code>. One difference is that supplying a
-            doc-string and metadata are required. (Feel free to leave them empty, though.)
+            <strong>Defining</strong> a <em>thingy</em> invocation function is merely typical Clojure function definition, e.g., using <code>defn</code>.
           </p>
-          <pre><code>(defn-thingy yippee
-&nbsp; &quot;My docstring.&quot;
-&nbsp; {:added 1.2}
-&nbsp; [_ _]
-&nbsp; &quot;Hooray!&quot;)</code></pre>
+          <pre><code>(defn yippee
+&nbsp;  [_ _]
+&nbsp;  &quot;Hooray!&quot;)</code></pre>
           <p>
-            This example assigns a 2-arity function that returns a string, ignoring its arguments. Observe.
+            This example defines a 2-arity function that returns a string, ignoring its arguments. Observe.
           </p>
-          <pre><code>((make-thingy) 99) ;; =&gt; &quot;Hooray!&quot;</code><br><code>((make-thingy :a :b :c) :foo) ;; =&gt; &quot;Hooray!&quot;</code><br><code>((make-thingy 1.23 4.56) 22/7) ;; =&gt; &quot;Hooray!&quot;</code></pre>
+          <pre><code>(yippee (make-thingy 1.23 4.56) 22/7) ;; =&gt; &quot;Hooray!&quot;</code></pre>
           <p>
-            The function is accessible in the same manner as any other var in the namespace.
+            The invocation function must have an arity of zero to nine. When there is at least one argument, the <em>thingy</em> instance is passed as the
+            first argument, followed by up to eight trailing arguments.
+          </p>
+        </li>
+        <li>
+          <p>
+            <strong>Assigning</strong> a <em>thingy</em> invocation functions uses <code>assign-thingy-fn!</code>.
+          </p>
+          <pre><code>(assign-thingy-fn! yippee)</code></pre>
+          <p>
+            Evaluating <code>assign-thingy-fn!</code> synchronously mutates the invocation function for all <em>thingy</em> instances.
           </p>
           <p>
-            The name has no affect on the operation of <em>thingy</em> instances, but is provided so that the function may be invoked manually, like this.
+            Now, any <em>thingy</em> instance, when at the head of an S-expression, will implicitly invoke <code>yippee</code>.
           </p>
-          <pre><code>(yippee :a :b) ;; =&gt; &quot;Hooray!&quot;</code></pre>
-          <p>
-            Evaluating <code>defn-thingy</code> synchronously mutates the invocation function for all <em>thingy</em> instances.
-          </p>
-          <p>
-            The invocation function may have an arity of zero to eight, inclusive. When there is at least one argument, the <em>thingy</em> instance is passed
-            as the first argument.
-          </p>
+          <pre><code>(def X (make-thingy 1 2 3))</code><br><br><code>(X :an-ignored-arg) ;; =&gt; &quot;Hooray!&quot;</code></pre>
         </li>
       </ol>
     </section>
@@ -262,7 +264,7 @@
             a standard Clojure function, that may be called from any site.
           </p>
           <p>
-            Defined with <code>defn-thingy</code>.
+            Defined with regular Clojure machinery, i.e., <code>defn</code>.
           </p>
         </dd>
       </dl>
@@ -277,7 +279,7 @@
     <p></p>
     <p id="page-footer">
       Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2025 March 13.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2025 March 14.<span id="uuid"><br>
       0b7db4a2-ac01-40eb-bb9b-0646700b987e</span>
     </p>
   </body>
