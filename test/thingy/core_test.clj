@@ -10,15 +10,6 @@
             [thingy.core :refer :all]))
 
 
-;; Note: Testing macroexpansion from lein requires precise namespacing. When
-;; using reqular quote, not all the symbols are namespaced. That's okay when
-;; running tests from within this namespace, but command line lein runs the
-;; tests from some other namespace. Syntax quote inserts the namespace so that
-;; the tests work properly from any namespace.
-
-;; See https://github.com/technomancy/leiningen/issues/912
-
-
 (defn foo-test
   {:UUIDv4 #uuid "618a3284-abac-4771-90ed-8aa273351120"}
   [a b c]
