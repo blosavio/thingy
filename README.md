@@ -279,7 +279,7 @@
     <p></p>
     <p id="page-footer">
       Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2025 July 12.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/readmoi">ReadMoi</a> on 2025 October 27.<span id="uuid"><br>
       0b7db4a2-ac01-40eb-bb9b-0646700b987e</span>
     </p>
   </body>

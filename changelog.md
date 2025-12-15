@@ -4,7 +4,7 @@
       thingy library changelog
     </h1><a href="https://github.com/blosavio/chlog">changelog info</a>
     <section>
-      <h3>
+      <h3 id="v1">
         version 1
       </h3>
       <p>
@@ -31,7 +31,7 @@
         <ul>
           <li>
             <div>
-              Removed `defn-thingy`
+              Removed `defn-thingy`.
             </div>
           </li>
         </ul>
@@ -49,7 +49,7 @@
       <hr>
     </section>
     <section>
-      <h3>
+      <h3 id="v0">
         version 0
       </h3>
       <p>
@@ -75,7 +75,7 @@
     </section>
     <p id="page-footer">
       Copyright © 2024–2025 Brad Losavio.<br>
-      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 March 14.<span id="uuid"><br>
+      Compiled by <a href="https://github.com/blosavio/chlog">Chlog</a> on 2025 October 27.<span id="uuid"><br>
       c8842399-457e-447a-83b0-861b8946f623</span>
     </p>
   </body>
