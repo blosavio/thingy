@@ -16,6 +16,8 @@
  :project-description "A Clojure library that provides a bizarre function definition mechanism"
  :project-name-formatted "thingy"
 
+ :preferred-project-metadata :lein
+
  :readme-UUID #uuid "0b7db4a2-ac01-40eb-bb9b-0646700b987e"
 
  :readme-html-directory "doc/"
