@@ -6,14 +6,16 @@
             :distribution :repo}
   :dependencies [[org.clojure/clojure "1.12.0"]]
   :repl-options {:init-ns thingy.core}
-  :profiles {:dev {:dependencies [[com.sagevisuals/chlog "1"]
-                                  [com.sagevisuals/readmoi "3"]]
+  :profiles {:dev {:dependencies [[com.sagevisuals/chlog "5"]
+                                  [com.sagevisuals/readmoi "6"]]
                    :plugins [[dev.weavejester/lein-cljfmt "0.12.0"]
                              [lein-codox "0.10.8"]]}
              :repl {}}
   :java-source-paths ["src/com/sagevisuals/thingy"]
   :javac-options ["-d" "@src/utilities/javac_destination"
                   "-cp" "@src/utilities/javac_classpath"]
+  :aliases {"readmoi" ["run" "-m" "readmoi-generator"]
+            "chlog" ["run" "-m" "chlog-generator"]}
   :codox {:metadata {:doc/format :markdown}
           :namespaces [#"^thingy\.(?!scratch)(?!tree-demo)"]
           :target-path "doc"
@@ -22,3 +24,4 @@
           :html {:transforms [[:div.sidebar.primary] [:append [:ul.index-link [:li.depth-1 [:a {:href "https://github.com/blosavio/thingy"} "Project Home"]]]]]}
           :project {:name "thingy" :version "version 1"}}
   :scm {:name "git" :url "https://github.com/blosavio/thingy"})
+
